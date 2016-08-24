@@ -32,9 +32,9 @@ This process takes place in 3 steps: discovery, authentication, and consumption.
 
 John buys a pair of sneakers from Nike. A **tamperproof, encrypted BLE tag** is attached to the sneakers. Using his iPhone, he uses the Chronicled app to scan the BLE tag and ends up on a page that shows information about the shoe (some images of the shoe and a description of the shoe). This is the **discovery** step.
 
-However, Nike can also provide some additional content to John, but only if John proves he is near the shoe. This is the **authentication** step that encompasses the principle of 'proof of proximity'. John taps the 'Verify' button in the app, and exchanges a digital signature from the chip in exchange for a JWT and a list of service URLs from Nike's service registry. As long as John maintains this JWT, he has access to these particular services (JWT also provides the concept of permissions, so Nike can provide the same service URL for multiple products, but the permissions in the JWT may inform which parts of that service he can consume).
+However, Nike can also provide some additional content to John, but only if John proves he is near the shoe. This is the **authentication** step that encompasses the principle of 'proof of proximity'. The app will initiate the proof-of-proxity workflow by requesting the chip to digitally sign a challenge, which will be exchanged for a JWT (JSON Web Token) that provides access to a list of service URLs available from Nike's cloud services. As long as John maintains this JWT, he has access to these particular services (JWT also provides the concept of permissions, so Nike can provide the same service URL for multiple products, but the permissions in the JWT may inform which parts of that service he can consume).
 
-In this case, the services Nike gave John were access to a private shoe selection with discounted prices, as well as special video content and other promotions. This is the **consumption** step. John's token may expire at some point, so as long as he is able to maintain proximity to his sneakers, he can have continual access to these services.
+In this case, the services Nike gave John were access to a limited edition shoe selection with discounted prices, as well as special video content and other promotions. This is the **consumption** step. John's token may expire at some point, so as long as he is able to maintain proximity to his sneakers, he can have continual access to these services. Access to the protected content can also be programmed by combining proof-of-proximity with other rules such as time/frequency/duration of proximity, in order to create patronage or possession-based consumer rewards.
 
 ### Code example
 
@@ -123,7 +123,7 @@ If we decode the `id_token` (https://www.jwt.io), we see this information in the
   "expires": 1471479266069
 }
 ```
-In other words, John's access to the content for his specific product ID expires some time on August 17th. He can authenticate again for a new token and get continued access to the content, as long as he stays close to his sneakers. Additionally, the `service_urls` Nike provides can change at any time as well during the next authentication (in other words, some services can expire or change at Nike's discretion, which is a benefit of using the service discovery pattern).
+In other words, John's access to the content for his specific product ID expires some time on August 17th 2016. He can authenticate again for a new token and get continued access to the content, as long as he stays close to his sneakers. Additionally, the `service_urls` Nike provides can change at any time as well during the next authentication (in other words, some services can expire or change at Nike's discretion, which is a benefit of using the service discovery pattern).
 
 # Conclusion
 
