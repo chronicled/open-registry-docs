@@ -24,6 +24,12 @@ NFC
 nfc:1.0:04062782DF4980
 ```
 
+Electronic Product Code: Serialized Global Trade Item Number
+
+```
+epc:id:sgtin:0614141.012345.62852
+```
+
 Serial number
 
 ```
@@ -40,6 +46,16 @@ RSA public key
 
 ```
 pbk:rsa:2048:cb47e6aada931986bb6bbf02c8618437c072cefa4e19c1ee6cb189b95a49e3ce94fb4de129c30ab7e683f827c98eb05e844af24f809ed5f217e93c14d58f64b98fc9136d3c2b56a672853a8f52c7ac7acd201b09d0f578f32f377f954905e18fa360448901d0ac538cd1102dc0821cd13a843e370471c00e95daf4bba001186c5b2220e15f2f4777aa9b0a823186c34d82fd557e245b4d5816f48bdc09dd34806982609b63012dd13fe603f23730940e68463b1b68f24ee77907925d286d55ec22bad53119f8354388e051854ef436589538f1efbf104af477dc3ca2cf29974fcf432639b8716c38c717d44c8f0c90d59f02f2ab0aef8b59c2feb460e2cbfb57010001
+```
+
+Cryptographic hash
+
+```
+hash:sha256:9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08
+
+hash:$argon2i$v=19$m=65536,t=2,p=4$YmFjODgwNzhjMjM4YTM0OTZkMzc2MDFiNjA5YmNjYzI4YmYzODcxZjFiNzQ3OWMyNjYyMmEzMTFmY2EzMzYxZA$3J6d5DzqwluIU5Wb/jC9or2vVxTAlhmFhlAn6BnGAfw
+
+hash:bcrypt:$2a$06$xmWwepLawuuA9mGs0.6Pd.WI5JaO14eZw8vZ2jS5NF9QeDBaFZeLy
 ```
 
 
@@ -129,9 +145,20 @@ A sample RSA public key in URN format with `2048` bits key and exponent `0x01000
 pbk:rsa:2048:cb47e6aada931986bb6bbf02c8618437c072cefa4e19c1ee6cb189b95a49e3ce94fb4de129c30ab7e683f827c98eb05e844af24f809ed5f217e93c14d58f64b98fc9136d3c2b56a672853a8f52c7ac7acd201b09d0f578f32f377f954905e18fa360448901d0ac538cd1102dc0821cd13a843e370471c00e95daf4bba001186c5b2220e15f2f4777aa9b0a823186c34d82fd557e245b4d5816f48bdc09dd34806982609b63012dd13fe603f23730940e68463b1b68f24ee77907925d286d55ec22bad53119f8354388e051854ef436589538f1efbf104af477dc3ca2cf29974fcf432639b8716c38c717d44c8f0c90d59f02f2ab0aef8b59c2feb460e2cbfb57010001
 ```
 
+## Electronic Product Code
+We're using same format described in the standard, though `urn:` prefix is omitted for brevity.
+Before EPC identity is getting stored in Open Registry `ID` portion of URN is encoded following standard description.
+
+## Cryptographic hash
+
+Hashes can be identified via 1) `hash:{type}:{hash}` or 2) `hash:{hash}`.
+
+We only need to specify `type` if the hash algorithm isn't present in the hash itself. For example, `sha256` hashes do not have any information in the hash itself specifying that it's a `sha256` hash, whereas an `argon2` hash *does* have that information in the hash itself since it's part of the Argon2 spec.
+
 
 ## Useful Resources
 Standards naming: https://www.ietf.org/rfc/rfc4492.txt
+EPC Tag Data Standard: http://www.gs1.org/sites/default/files/docs/epc/TDS_1_9_Standard.pdf
 
 ## Copyright
 Copyright (c) 2016 Chronicled, Inc. All rights reserved.
